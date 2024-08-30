@@ -1,0 +1,7 @@
+{
+  "name": "directus-auth",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
