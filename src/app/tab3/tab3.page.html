@@ -1,17 +1,63 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>User Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="user">
+  <ion-grid class="ion-padding">
+    <!-- Profile Image Section -->
+    <ion-row class="ion-justify-content-center ion-padding-bottom">
+      <ion-col size="12" class="ion-text-center">
+          <ion-avatar class="position-relative">
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+          <img [src]="getImageUrl(getUserAvatar(user.avatarId))" />
+          <div class="edit-profile">
+            <ion-icon color="primary" name="camera-outline"></ion-icon>
+     </div>
+    </ion-avatar>
+     <ion-col size="12"  class="d-flex">
+      <div *ngFor="let image of files; let i = index" >
+        <img [src]="getImageUrl(image.filename_disk)" (click)="setAvatar(user.id, image.id)"  [alt]="image.title" width="100" height="100" />
+      </div>
+     </ion-col>
+      </ion-col>
+        <ion-item>
+          <ion-label position="stacked">Select an Image or File</ion-label>
+          <input type="file" (change)="onFileSelected($event)" />
+        </ion-item>
+     </ion-row>
+</ion-grid>
+
+
+  <ion-card >
+    <form [formGroup]="profileForm"  (ngSubmit)="updateUser(user.id,first_name,last_name)">
+      <ion-item>
+        <ion-label  position="stacked">Email</ion-label>
+        <ion-input [(ngModel)]= "email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">First Name</ion-label>
+        <ion-input [(ngModel)]= "first_name" formControlName="first_name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Last Name</ion-label>
+        <ion-input [(ngModel)]= "last_name" formControlName="last_name"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" [disabled]="profileForm?.invalid">
+        Update Profile
+      </ion-button>
+
+      <ion-button (click)="refreshToken()">refresh token</ion-button>
+
+    </form>
+  </ion-card>
 </ion-content>
