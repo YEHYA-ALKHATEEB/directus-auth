@@ -14,4 +14,34 @@
   </ion-header>
 
   <app-explore-container name="Tab 1 page"></app-explore-container>
+  <!-- registration.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-button (click)="onRegister()">on Register</ion-button>
+<ion-button (click)="getRoles()">get Roles</ion-button>
+<ion-button (click)="login()">Login</ion-button>
+<ion-button (click)="getCurrentUser()">get Current User</ion-button>
+<ion-button (click)="getCurrentUserWithout()">get Current without fields</ion-button>
+<ion-button (click)="update()">update user</ion-button>
+<ion-button (click)="listFiles()">listFiles</ion-button>
+<ion-button (click)="createFolder()">create folder</ion-button>
+<ion-button (click)="getUserAssetsDirectoryId()">getUserAssetsDirectoryId</ion-button>
+<ion-button (click)="logout()">Logout</ion-button>
+
+<ion-item>
+  <ion-label position="stacked">Select an Image or File</ion-label>
+  <input type="file" (change)="onFileSelected($event)" />
+</ion-item>
+
+<div *ngFor="let image of files">
+  <img [src]="getImageUrl(image.filename_disk)" width="300" height="200" [alt]="image.title" />
+</div>
+{{files | json}}
+
 </ion-content>
