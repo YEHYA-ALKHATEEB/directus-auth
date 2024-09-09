@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registration</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-card class="ion-padding">
+  <ion-card-header>
+    <ion-title>
+      Sign Up
+    </ion-title>
+  </ion-card-header>
+  <form (ngSubmit)="registration()" #registerForm="ngForm">
+
+    <ion-item>
+      <ion-input label="Email" label-placement="floating" fill="solid" type="email" required [(ngModel)]="email" name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Password" label-placement="floating" fill="solid" type="password" required [(ngModel)]="password" name="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="First name" label-placement="floating" fill="solid" type="text" required [(ngModel)]="firstName" name="firstName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Last name" label-placement="floating" fill="solid" type="text" required [(ngModel)]="lastName" name="lastName"></ion-input>
+    </ion-item>
+
+
+    <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="!registerForm.form.valid">Register</ion-button>
+
+  </form>
+
+  <ion-button (click)="refreshToken()">refresh token</ion-button>
+  <p>Already have an account?  <a  [routerLink]="['/login']" >Login</a></p>
+</ion-card>
+
+</ion-content>
